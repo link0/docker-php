@@ -6,13 +6,13 @@ RUN apk update && apk add --no-cache \
 	build-base \
 	freetype-dev \
 	git \
+	grep \
 	icu-dev \
 	libjpeg-turbo-dev \
 	libpng-dev \
 	libxml2-dev \
 	openldap-dev \
 	openssl \
-	grep \
 ;
 
 # Install xdebug
