@@ -12,6 +12,7 @@ RUN apk update && apk add --no-cache \
 	libxml2-dev \
 	openldap-dev \
 	openssl \
+	grep \
 ;
 
 # Install xdebug
