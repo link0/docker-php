@@ -39,6 +39,9 @@ RUN apk del \
 	build-base \
 ;
 
+# Memory Limit
+RUN echo "memory_limit=-1" > $PHP_INI_DIR/conf.d/memory-limit.ini
+
 # Install composer
 COPY install_composer.sh /root
 RUN /bin/sh /root/install_composer.sh && rm /root/install_composer.sh
