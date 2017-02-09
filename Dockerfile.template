@@ -1,4 +1,4 @@
-FROM php:7.0-alpine
+FROM php:PHPVERSION-alpine
 MAINTAINER Dennis de Greef <github@link0.net>
 
 RUN apk update && apk add --no-cache \
@@ -31,6 +31,7 @@ RUN docker-php-ext-install -j $(grep processor /proc/cpuinfo | wc -l) \
 	ldap \
 	mbstring \
 	pdo_mysql \
+	sockets \
 	zip \
 ;
 
