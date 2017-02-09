@@ -1,0 +1,64 @@
+image: docker:latest
+services:
+- docker:dind
+
+stages:
+  - build
+  - test
+  - deploy
+
+before_script:
+  - export DOCKER_HOST=$DOCKER_PORT
+
+build:5.6:
+  stage: build
+  script:
+    - ./build.sh 5.6
+build:7.0:
+  stage: build
+  script:
+    - ./build.sh 7.0
+build:7.1:
+  stage: build
+  script:
+    - ./build.sh 7.1
+
+test:5.6:
+  stage: test
+  script:
+    - ./test.sh 5.6
+test:7.0:
+  stage: test
+  script:
+    - ./test.sh 7.0
+test:7.1:
+  stage: test
+  script:
+    - ./test.sh 7.1
+
+deploy:5.6:
+  stage: deploy
+  only:
+    - master
+  script:
+    - ./deploy 5.6
+deploy:7.0:
+  stage: deploy
+  only:
+    - master
+  script:
+    - ./deploy 7.0
+deploy:7.1:
+  stage: deploy
+  only:
+    - master
+  script:
+    - ./deploy 7.1
+deploy:latest:
+  stage: deploy
+  only:
+    - master
+  script:
+    - docker tag link0/php:latest link0/php:7.1
+    - ./deploy latest
+
