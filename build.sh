@@ -12,7 +12,7 @@ rm -rf build/$VERSION;
 mkdir -p build/$VERSION;
 
 cat Dockerfile.template | sed "s/PHPVERSION/$VERSION/g" > build/$VERSION/Dockerfile;
-ln -s ../../install_composer.sh build/$VERSION/install_composer.sh;
+cp install_composer.sh build/$VERSION/install_composer.sh;
 
 docker build -t link0/php:$VERSION build/$VERSION
 
