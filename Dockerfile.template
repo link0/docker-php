@@ -53,6 +53,9 @@ RUN echo "phar.readonly = 0" > /usr/local/etc/php/conf.d/phar-readonly.ini
 
 # Run underprivileged user
 RUN adduser -D -u 1000 php
+
+RUN touch /usr/local/etc/php/conf.d/custom.ini && chmod php /usr/local/etc/php/conf.d/custom.ini
+
 USER php
 WORKDIR /home/php
 ENV PATH "/home/php/.composer/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
