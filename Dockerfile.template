@@ -59,3 +59,4 @@ ENV PATH "/home/php/.composer/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbi
 
 # Require some global composer packages for convenience
 RUN composer global require "hirak/prestissimo:^0.3";
+RUN composer global require jakub-onderka/php-parallel-lint jakub-onderka/php-console-highlighter;
