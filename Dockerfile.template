@@ -11,6 +11,7 @@ RUN apk update && apk add --no-cache \
 	libjpeg-turbo-dev \
 	libpng-dev \
 	libxml2-dev \
+	postgresql-dev \
 	openldap-dev \
 	openssl \
 ;
@@ -32,6 +33,7 @@ RUN docker-php-ext-install -j $(grep processor /proc/cpuinfo | wc -l) \
 	ldap \
 	mbstring \
 	pdo_mysql \
+	pdo_pgsql \
 	sockets \
 	zip \
 ;
