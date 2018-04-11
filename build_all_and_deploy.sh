@@ -2,14 +2,16 @@
 
 set -e
 
-for version in 7.0 7.1 7.2;
+./ci/prepare.sh
+
+for version in $(cat versions.txt);
 do
-  ./build.sh $version;
-  ./test.sh $version;
-  ./deploy.sh $version;
+  ./ci/build.sh $version;
+  ./ci/test.sh $version;
+  ./ci/deploy.sh $version;
 done
 
-docker tag link0/php:7.2 link0/php:latest;
+docker tag link0/php:$(cat versions.txt | tail -1) link0/php:latest;
 docker push link0/php:latest;
 
 

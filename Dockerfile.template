@@ -47,9 +47,12 @@ RUN apk del \
 # Memory Limit
 RUN echo "memory_limit=-1" > $PHP_INI_DIR/conf.d/memory-limit.ini
 
+# Add scripts
+RUN mkdir -p /opt/link0/bin
+ADD scripts/* /opt/link0/bin/
+
 # Install composer
-COPY install_composer.sh /root
-RUN /bin/sh /root/install_composer.sh && rm /root/install_composer.sh
+RUN /bin/sh /opt/link0/bin/install_composer.sh
 
 # Be able to make phars
 RUN echo "phar.readonly = 0" > /usr/local/etc/php/conf.d/phar-readonly.ini
@@ -57,11 +60,11 @@ RUN echo "phar.readonly = 0" > /usr/local/etc/php/conf.d/phar-readonly.ini
 # Run underprivileged user
 RUN adduser -D -u 1000 php
 
-RUN touch /usr/local/etc/php/conf.d/custom.ini && chown php /usr/local/etc/php/conf.d/custom.ini
+RUN touch /usr/local/etc/php/conf.d/custom.ini && chown php /usr/local/etc/php/conf.d/custom.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 USER php
 WORKDIR /home/php
-ENV PATH "/home/php/.composer/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV PATH "/opt/link0/bin:/home/php/.composer/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # Require some global composer packages for convenience
 RUN composer global require "hirak/prestissimo:^0.3";

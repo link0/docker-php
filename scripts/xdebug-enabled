@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -e
+
+grep -q zend_extension /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
