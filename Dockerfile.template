@@ -60,6 +60,9 @@ RUN /bin/sh /opt/link0/bin/install_composer.sh
 # Be able to make phars
 RUN echo "phar.readonly = 0" > /usr/local/etc/php/conf.d/phar-readonly.ini
 
+# Disable xdebug by default
+RUN /opt/link0/bin/xdebug-disable
+
 # Run underprivileged user
 RUN adduser -D -u 1000 php
 
