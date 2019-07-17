@@ -14,6 +14,9 @@ RUN apk update && apk add --no-cache \
 	postgresql-dev \
 	openldap-dev \
 	openssl \
+#if gte 7.3
+	libzip-dev \
+#endif
 ;
 
 # Install xdebug
@@ -64,7 +67,7 @@ RUN touch /usr/local/etc/php/conf.d/custom.ini && chown php /usr/local/etc/php/c
 
 USER php
 WORKDIR /home/php
-ENV PATH "/opt/link0/bin:/home/php/.composer/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV PATH "/opt/link0/bin:/home/php/.composer/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 # Require some global composer packages for convenience
 RUN composer global require "hirak/prestissimo:^0.3";
